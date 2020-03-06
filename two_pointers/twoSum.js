@@ -20,7 +20,7 @@ function twoSum(numbers, target) {
         j = numbers.length - 1;
     if (numbers == null) {
         return null;
-    };
+    }
     while (i < j) {
         let sum = numbers[i] + numbers[j];
         if (sum == target) {

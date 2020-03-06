@@ -5,7 +5,7 @@
 function judgeSquareSum(c) {
     if (c < 0) {
         return false;
-    };
+    }
     let i = 0,
         j = parseInt(Math.sqrt(c));
     while (i <= j) {
