@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS十大排序算法</title>
+</head>
+
+<body>
+    <script>
+        //冒泡排序（bubble sort）
+        // var a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+        // bubbleSort(a);
+        // console.log(a);
+
+        // function bubbleSort(array) {
+        //     for (let i = 0; i < array.length; i++) {
+        //         for (let j = 0; j < array.length - 1 - i; j++) {
+        //             if (array[j] > array[j + 1]) {
+        //                 let temp = array[j];
+        //                 array[j] = array[j + 1];
+        //                 array[j + 1] = temp;
+        //             }
+        //         }
+        //     }
+        // }
+
+        //选择排序
+        // var a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+        // console.log(slectionSort(a));
+
+        // function slectionSort(array) {
+        //     var minIndex, temp;
+        //     for (let i = 0; i < array.length - 1; i++) {
+        //         minIndex = i;
+        //         for (let j = i + 1; j < array.length; j++) {
+        //             if (array[j] < array[minIndex]) {
+        //                 minIndex = j;
+        //             }
+        //         }
+        //         temp = array[i];
+        //         array[i] = array[minIndex];
+        //         array[minIndex] = temp;
+        //     }
+        //     return array;
+        // }
+
+        //插入排序
+        // var a = [9, 8, 11, 6, 11, 12, 3, 2, 1, 0];
+        // console.log(InsertSort(a))
+
+        // function InsertSort(array) {
+        //     var preIndex, current;
+        //     for (let i = 1; i < array.length; i++) {
+        //         preIndex = i - 1;
+        //         current = array[i];
+        //         //将current的值与前面有序数组比较，然后插入
+        //         while (preIndex >= 0 && current < array[preIndex]) {
+        //             array[preIndex + 1] = array[preIndex];
+        //             preIndex--;
+        //         }
+        //         array[preIndex + 1] = current;
+        //     }
+        //     return array;
+        // }
+
+        //折半插入排序
+        // console.log(InsertSort2(a));
+
+        // function InsertSort2(array) {
+        //     var j, middle, low, heigh;
+        //     var temp;
+        //     for (let i = 1; i < array.length; i++) {
+        //         temp = array[i]; //待插入数
+        //         low = 0;
+        //         heigh = i - 1;
+        //         //折半查找应该插入的位置
+        //         while (low <= heigh) {
+        //             middle = Math.floor((low + heigh) / 2);
+        //             if (temp >= array[middle]) {
+        //                 low = middle + 1;
+        //             } else {
+        //                 heigh = middle - 1;
+        //             }
+        //         }
+        //         //确定位置后将数插入
+        //         //为temp腾出位置
+        //         for (j = i - 1; j > heigh; j--) {
+        //             array[j + 1] = array[j];
+        //         }
+        //         array[j + 1] = temp;
+        //     }
+        //     return array;
+        // }
+        // var a = [9, 8, 11, 6, 11, 12, 3, 2, 1, 0];
+        // console.log(shellSort(a));
+
+        // function shellSort(arr) {
+        //     var len = arr.length,
+        //         temp,
+        //         gap = 1;
+        //     while (gap < len / 3) { //动态定义间隔序列
+        //         gap = gap * 3 + 1;
+        //     }
+        //     for (gap; gap > 0; gap = Math.floor(gap / 3)) {
+        //         for (var i = gap; i < len; i++) {
+        //             temp = arr[i];
+        //             for (var j = i - gap; j >= 0 && arr[j] > temp; j -= gap) {
+        //                 arr[j + gap] = arr[j];
+        //             }
+        //             arr[j + gap] = temp;
+        //         }
+        //     }
+        //     return arr;
+        // }
+
+        // 希尔排序
+        // var a = [9, 8, 11, 6, 11, 12, 3, 2, 1, 0];
+        // shellSort(a);
+        // console.log(a);
+
+        // function shellSort(array) {
+        //     var gap = 1;
+        //     var temp;
+        //     // 确定步长
+        //     while (gap < array.length / 3) {
+        //         gap = 3 * gap + 1;
+        //     }
+        //     for (gap; gap >= 1; gap = Math.floor((gap / 3))) {
+        //         for (let i = gap; i < array.length; i++) {
+        //             temp = array[i];
+        //             for (var j = i - gap; j >= 0 && temp < array[j]; j -= gap) {
+        //                 array[j + gap] = array[j];
+        //             }
+        //             array[j + gap] = temp;
+        //         }
+
+        //     }
+
+        // }
+
+        // 归并排序
+        // var a = [9, 8, 11, 6, 11, 12, 3, 2, 1, 0];
+        // console.log(mergeSort(a));
+
+
+        // function mergeSort(array) { //自上而下递归
+        //     if (array.length < 2) {
+        //         return array;
+        //     }
+
+        //     var middle = Math.floor(array.length / 2);
+        //     var left = array.slice(0, middle);
+        //     var right = array.slice(middle);
+        //     return merge(mergeSort(left), mergeSort(right));
+        // }
+        // // 排序部分
+        // function merge(left, right) {
+        //     var result = [];
+        //     while (left.length && right.length) {
+        //         if (left[0] <= right[0]) {
+        //             result.push(left.shift());
+        //         } else {
+        //             result.push(right.shift());
+        //         }
+        //     }
+        //     while (left.length) {
+        //         result.push(left.shift());
+        //     }
+        //     while (right.length) {
+        //         result.push(right.shift());
+        //     }
+        //     return result;
+        // }
+
+        //归并排序——迭代
+        // var a = [9, 8, 11, 6, 11, 12, 101, 2, 1, 0];
+        // console.log(mergeSort(a));
+
+        // function mergeSort(array) {
+        //     var i, next, left_min, left_max, right_min, right_max;
+        //     var temp = new Array(array.length);
+        //     //i：步长。逐级上升，第一次比较2个，第二次比较4个，第三次比较8个。。。
+        //     for (i = 1; i < array.length; i *= 2) {
+        //         //每次都从0开始，数组的头元素开始  
+        //         for (left_min = 0; left_min < array.length - i; left_min = right_max) {
+        //             right_min = left_max = left_min + i;
+        //             right_max = right_min + i;
+        //             //right_max最大到n，防止越界
+        //             if (right_max > array.length) {
+        //                 right_max = array.length;
+        //             }
+        //             //next是用来标志temp数组下标的，由于每次数据都有返回到K，  
+        //             //故每次开始得重新置零 
+        //             next = 0;
+        //             //如果左边的数据还没达到分割线且右边的数组没到达分割线，开始循环 
+        //             while (left_min < left_max && right_min < right_max) {
+        //                 if (array[left_min] < array[right_min]) {
+        //                     temp[next++] = array[left_min++];
+        //                 } else {
+        //                     temp[next++] = array[right_min++];
+        //                 }
+        //             }
+        //             //如果左侧有剩余，将剩余的拼到右侧
+        //             while (left_min < left_max) {
+        //                 array[--right_min] = array[--left_max];
+        //             }
+        //             while (next > 0) {
+        //                 array[--right_min] = temp[--next];
+        //             }
+        //         }
+
+        //     }
+        //     return array;
+        // }
+
+        //快速排序
+        //找中轴
+        //从右往左，右边赋值到左边；
+        //从左往右，左边赋值到右边；
+        //找中轴过程中，保证对于两个指针left和right，在它们相遇时，left左边的都比基准值小，right右边的都比基准值大
+        // var arr = [6, 5, 8, 7, 4, 3];
+        // quickSort(arr, 0, arr.length - 1);
+        // console.log(arr);
+
+        // function quickSort(arr, left, right) {
+        //     if (left < right) {
+        //         var index = getIndex(arr, left, right);
+        //         quickSort(arr, left, index - 1);
+        //         quickSort(arr, index + 1, right);
+        //     }
+        // }
+
+        // function getIndex(arr, left, right) {
+        //     var pivot = arr[left];
+        //     while (left < right) {
+        //         while (arr[right] >= pivot && left < right) {
+        //             right--;
+        //         }
+        //         arr[left] = arr[right];
+        //         while (arr[left] <= pivot && left < right) {
+        //             left++;
+        //         }
+        //         arr[right] = arr[left];
+        //     }
+        //     arr[left] = pivot;
+        //     return left;
+        // }
+
+
+        // //堆排序
+        // //数值交换
+        // function swap(arr, i, j) {
+        //     let temp = arr[i];
+        //     arr[i] = arr[j];
+        //     arr[j] = temp;
+        // }
+        // //heapify操作
+        // function heapifty(arr, n, i) {
+        //     var c1 = 2 * i + 1,
+        //         c2 = 2 * i + 2,
+        //         max = i;
+        //     if (c1 < n && arr[max] < arr[c1]) {
+        //         max = c1;
+        //     }
+        //     if (c2 < n && arr[max] < arr[c2]) {
+        //         max = c2;
+        //     }
+        //     if (max != i) {
+        //         swap(arr, max, i);
+        //         heapifty(arr, n, max);//调整经改动的那个节点
+        //     }
+        // }
+        // //建立大顶堆
+        // function build_heap(arr, n) {
+        //     for (let i = Math.floor((n - 2) / 2); i >= 0; i--) {
+        //         heapifty(arr, n, i);
+        //     }
+        // }
+        // //排序
+        // function heapSort(arr) {
+        //     build_heap(arr, arr.length);//构建堆
+        //     var length = arr.length;
+        //     for (let i = length - 1; i > 0; i--) {
+        //         swap(arr, i, 0);  //将堆首与堆尾互换，让最大的值到堆尾部；
+        //         length--; // 将堆尾切掉
+        //         heapifty(arr, length, 0); //再对堆进行heapify操作，让剩余最大值上浮到0号节点
+        //     }
+        // }
+
+        // var arr = [6, 5, 8, 7, 4, 3, 9, 9, 4];
+        // heapSort(arr);
+        // console.log(arr);
+        var arr = [6, 5, 8, 7, 4, 3, 9, 9, 4, 1, 1, 1, 1, 2];
+        countingSort(arr, 9);
+        console.log(arr);
+        //计数排序
+        function countingSort(arr, maxValue) {
+            var bucket = new Array(maxValue + 1),
+                sortedIndex = 0;
+
+            for (let i = 0; i < arr.length; i++) {
+                if (!bucket[arr[i]]) { //如果bucket[arr[i]为非大于等于0的数字，就将它初始化为0
+                    bucket[arr[i]] = 0;
+                }
+                bucket[arr[i]]++;
+            }
+            //将排序后的数返还到原数组
+            for (let j = 0; j < maxValue + 1; j++) {
+                while (bucket[j]-- > 0) {
+                    arr[sortedIndex++] = j;
+                }
+            }
+
+        }
+    </script>
+</body>
+
+</html>
