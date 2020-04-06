@@ -292,28 +292,171 @@
         // var arr = [6, 5, 8, 7, 4, 3, 9, 9, 4];
         // heapSort(arr);
         // console.log(arr);
-        var arr = [6, 5, 8, 7, 4, 3, 9, 9, 4, 1, 1, 1, 1, 2];
-        countingSort(arr, 9);
-        console.log(arr);
+
+        // var arr = [6, 5, 8, 7, 4, 3, 9, 9, 4, 1, 1, 1, 1, 2];
+        // countingSort(arr, 9);
+        // console.log(arr);
         //计数排序
-        function countingSort(arr, maxValue) {
-            var bucket = new Array(maxValue + 1),
-                sortedIndex = 0;
+        // function countingSort(arr, maxValue) {
+        //     var bucket = new Array(maxValue + 1),
+        //         sortedIndex = 0;
 
-            for (let i = 0; i < arr.length; i++) {
-                if (!bucket[arr[i]]) { //如果bucket[arr[i]为非大于等于0的数字，就将它初始化为0
-                    bucket[arr[i]] = 0;
-                }
-                bucket[arr[i]]++;
-            }
-            //将排序后的数返还到原数组
-            for (let j = 0; j < maxValue + 1; j++) {
-                while (bucket[j]-- > 0) {
-                    arr[sortedIndex++] = j;
-                }
-            }
+        //     for (let i = 0; i < arr.length; i++) {
+        //         if (!bucket[arr[i]]) { //如果bucket[arr[i]为非大于等于0的数字，就将它初始化为0
+        //             bucket[arr[i]] = 0;
+        //         }
+        //         bucket[arr[i]]++;
+        //     }
+        //     //将排序后的数返还到原数组
+        //     for (let j = 0; j < maxValue + 1; j++) {
+        //         while (bucket[j]-- > 0) {
+        //             arr[sortedIndex++] = j;
+        //         }
+        //     }
 
-        }
+        // }
+
+        // var arr = [6, 5, 8, 7, 4, 3, 9, 9, 4, 1, 1, 1, 1, 2];
+        // var arr = [1.1, 1.3, 8.6, 5.6];
+        // console.log(BucketSort(arr));
+        // quickSort(arr, 0, arr.length - 1);
+        // console.log(arr);
+        // 桶排序
+        // console.log(Math.ceil(0));
+
+
+        // function BucketSort(arr, gap) {
+        //     if (arr.length === 0 || arr.length < 2) {
+        //         return arr;
+        //     }
+
+        //     var minValue = arr[0],
+        //         maxValue = arr[0],
+        //         result = new Array();
+        //     //找出arr的最大最小值
+        //     for (let i = 0; i < arr.length; i++) {
+        //         minValue = minValue < arr[i] ? minValue : arr[i];
+        //         maxValue = maxValue > arr[i] ? maxValue : arr[i];
+        //     }
+        //     //初始化捅
+        //     //同数量
+        //     var DEFAULT_BUCKET_GAP = 5;
+        //     gap = gap || DEFAULT_BUCKET_GAP;
+        //     //计算桶的个数
+        //     var bucketNum = Math.ceil((maxValue - minValue) / gap);
+        //     var buckets = new Array(bucketNum);
+        //     for (let i = 0; i < bucketNum; i++) {
+        //         buckets[i] = [];
+        //     }
+
+        //     //利用映射函数将数据分配到各个桶中
+        //     for (let i = 0; i < arr.length; i++) {
+        //         var index;
+        //         for (let j = 0; j < bucketNum; j++) {
+        //             if (minValue <= arr[i] && arr[i] < minValue + gap * (j + 1)) {
+        //                 index = j;
+        //             }
+        //         }
+        //         buckets[index].push(arr[i]);
+        //     }
+        //     //去除空桶
+        //     buckets = buckets.filter(function(item) {
+        //         return item.length;
+        //     });
+        //     //在每个桶中进行排序
+        //     for (let i = 0; i < buckets.length; i++) {
+        //         //对每个桶中数据进行排序，在将排好序的桶进行拼接
+        //         // quickSort(buckets[i], 0, buckets[i].length - 1);
+        //         InsertSort2(buckets[i]);
+        //         result = result.concat(buckets[i]);
+        //     }
+        //     return result;
+        // }
+
+
+        //针对数字
+        //LSD
+        // var arr = [423, 115, 2225, 31, 15555];
+        // console.log(radixSort(arr));
+
+        // function radixSort(arr) {
+        //     //求出最大数的位数
+        //     var max = arr[0],
+        //         dev = 1;
+
+        //     for (let i = 1; i < arr.length; i++) {
+        //         max = max > arr[i] ? max : arr[i];
+        //     }
+        //     var radix = max.toString().length;
+        //     //针对每一位由低到高进行计数排序，共进行radix轮
+        //     for (let i = 1; i <= radix; i++) {
+        //         //结果暂存数组
+        //         var temp = new Array();
+        //         var count = new Array(10); //10个桶
+        //         for (let j = 0; j < count.length; j++) {
+        //             count[j] = [];
+        //         }
+        //         //把数组中的数放到桶中
+        //         for (let k = 0; k < arr.length; k++) {
+        //             let pos = parseInt(arr[k] / dev) % 10;
+        //             count[pos].push(arr[k]);
+        //         }
+        //         dev *= 10;
+        //         //将计数排序结果拼回
+        //         for (let l = 0; l < 10; l++) {
+        //             temp = temp.concat(count[l]);
+        //         }
+        //         arr = temp;
+
+        //     }
+        //     return arr;
+
+
+        // }
+
+        // var arr = ["banana", "apple", "orange", "ape", "he", "a"];
+        // console.log(radixSort_String(arr));
+
+        // function radixSort_String(arr) {
+        //     if (arr.length < 2) {
+        //         return arr;
+        //     }
+
+        //     var radix = arr[0].length;
+        //     for (let i = 1; i < arr.length; i++) {
+        //         radix = radix > arr[i].length ? radix : arr[i].length;
+        //     }
+        //     for (let j = 1; j <= radix; j++) {
+        //         var s = "a";
+        //         var temp = [];
+        //         var count = new Array(26);
+        //         for (let i = 0; i < count.length; i++) {
+        //             count[i] = [];
+
+        //         }
+        //         //取出每个字符的第j位
+        //         for (let k = 0; k < arr.length; k++) {
+        //             if (arr[k].charAt(radix - j) == "") {
+        //                 count[0].push(arr[k]);
+        //             } else {
+        //                 var pos = arr[k].charCodeAt(radix - j) - s.charCodeAt(0);
+        //                 count[pos].push(arr[k]);
+        //             }
+        //         }
+        //         //将结果拼回
+        //         for (let m = 0; m < 26; m++) {
+        //             temp = temp.concat(count[m]);
+        //         }
+        //         arr = temp;
+        //     }
+        //     return arr;
+
+        // }
+
+        // }
+        // var s = "zZ"
+        // console.log(s.charCodeAt("0"), s.charCodeAt("1"));
+        // console.log(s.localeCompare("A"));
     </script>
 </body>
 
