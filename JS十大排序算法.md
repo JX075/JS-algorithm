@@ -453,3 +453,199 @@ function countingSort(arr, maxValue) {
 //2.如果数据离散型较高，会造成空间浪费
 ```
 
+
+
+***
+
+
+
+### 桶排序
+
+#### 1.算法说明
+
+> ##### 桶排序须知：
+>
+> 桶排序是计数排序的升级版。它利用了函数的映射关系，高效与否的关键就在于这个映射函数的确定。
+> 为了使桶排序更加高效，我们需要做到这两点：
+>
+> 1. 在额外空间充足的情况下，尽量增大桶的数量
+> 2. 使用的映射函数能够将输入的N个数据均匀的分配到K个桶中
+>
+> 同时，对于桶中元素的排序，选择何种比较排序算法对于性能的影响至关重要。
+>
+> ##### 什么时候最快（Best Cases）：
+>
+> 当输入的数据可以均匀的分配到每一个桶中.
+>
+> ##### 什么时候最慢（Worst Cases）：
+>
+> 当输入的数据被分配到了同一个桶中.
+
+#### 2.算法步骤
+
+>（1）遍历数组，找到数组的最小值和最大值；
+>
+>（2）根据步长和最值的差值，计算桶的个数Math.ceil((max-min+1)/step)；
+>
+>（3）再次遍历数组，分档归入所属的桶内，并使用某种排序决定元素应该被放在桶的哪个位置（或者对每个通进行排序）；
+>
+>（4）遍历桶中的数据，将数据有序地合起来；
+
+#### 2.JS算法
+
+```js
+function BucketSort(arr, gap) {
+            if (arr.length === 0 || arr.length < 2) {
+                return arr;
+            }
+
+            var minValue = arr[0],
+                maxValue = arr[0],
+                result = new Array();
+            //找出arr的最大最小值
+            for (let i = 0; i < arr.length; i++) {
+                minValue = minValue < arr[i] ? minValue : arr[i];
+                maxValue = maxValue > arr[i] ? maxValue : arr[i];
+            }
+            //初始化捅
+            //同数量
+            var DEFAULT_BUCKET_GAP = 5;
+            gap = gap || DEFAULT_BUCKET_GAP;
+            //计算桶的个数
+            var bucketNum = Math.ceil((maxValue - minValue) / gap);
+            var buckets = new Array(bucketNum);
+            for (let i = 0; i < bucketNum; i++) {
+                buckets[i] = [];
+            }
+
+            //利用映射函数将数据分配到各个桶中
+            for (let i = 0; i < arr.length; i++) {
+                var index;
+                for (let j = 0; j < bucketNum; j++) {
+                    if (minValue <= arr[i] && arr[i] < minValue + gap * (j + 1)) {
+                        index = j;
+                    }
+                }
+                buckets[index].push(arr[i]);
+            }
+            //去除空桶
+            buckets = buckets.filter(function(item) {
+                return item.length;
+            });
+            //在每个桶中进行排序
+            for (let i = 0; i < buckets.length; i++) {
+                //对每个桶中数据进行排序，在将排好序的桶进行拼接(排序方法自选)
+                // quickSort(buckets[i], 0, buckets[i].length - 1);
+                InsertSort2(buckets[i]);
+                result = result.concat(buckets[i]);
+            }
+            return result;
+        }
+```
+
+
+
+***
+
+
+
+### 基数排序：多关键字排序
+
+#### 1.算法说明
+
+>##### 基数排序须知：
+>
+>基数排序有两种方法：
+>
+>1. MSD 从高位开始进行排序
+>2. LSD 从低位开始进行排序
+>
+>##### 基数排序 vs 计数排序 vs 桶排序
+>
+>这三种排序算法都利用了桶的概念，但对桶的使用方法上有明显差异：
+>基数排序：根据键值的每位数字来分配桶
+>计数排序：每个桶只存储单一键值
+>桶排序：每个桶存储一定范围的数值
+>
+><font color="red">适用情况：数据位数多（数据按位数最长的来排），数据跨度大，例如：手机号、英文字母等</font>
+
+#### 2.JS算法
+
+```js
+//针对数字
+//LSD
+function radixSort(arr) { //
+            //求出最大数的位数
+            var max = arr[0],
+                dev = 1;
+
+            for (let i = 1; i < arr.length; i++) {
+                max = max > arr[i] ? max : arr[i];
+            }
+            var radix = max.toString().length;
+            //针对每一位由低到高进行计数排序，共进行radix轮
+            for (let i = 1; i <= radix; i++) {
+                //结果暂存数组
+                var temp = new Array();
+                var count = new Array(10); //10个桶
+                for (let j = 0; j < count.length; j++) {
+                    count[j] = [];
+                }
+                //把数组中的数放到桶中
+                for (let k = 0; k < arr.length; k++) {
+                    let pos = parseInt(arr[k] / dev) % 10;
+                    count[pos].push(arr[k]);
+                }
+                dev *= 10;
+                //将计数排序结果拼回
+                for (let l = 0; l < 10; l++) {
+                    temp = temp.concat(count[l]);
+                }
+                arr = temp;
+
+            }
+            return arr;
+        }
+```
+
+```js
+//针对字符串（全部为小写）
+function radixSort_String(arr) {
+            if (arr.length < 2) {
+                return arr;
+            }
+
+            var radix = arr[0].length;
+            for (let i = 1; i < arr.length; i++) {
+                radix = radix > arr[i].length ? radix : arr[i].length;
+            }
+            for (let j = 1; j <= radix; j++) {
+                var s = "a";
+                var temp = [];
+                var count = new Array(26);
+                for (let i = 0; i < count.length; i++) {
+                    count[i] = [];
+
+                }
+                //取出每个字符的第j位
+                for (let k = 0; k < arr.length; k++) {
+                    if (arr[k].charAt(radix - j) == "") {
+                        count[0].push(arr[k]);
+                    } else {
+                        var pos = arr[k].charCodeAt(radix - j) - s.charCodeAt(0);
+                        count[pos].push(arr[k]);
+                    }
+                }
+                //将结果拼回
+                for (let m = 0; m < 26; m++) {
+                    temp = temp.concat(count[m]);
+                }
+                arr = temp;
+            }
+            return arr;
+
+        }
+var arr = ["banana", "apple", "orange", "ape", "he", "a"];
+console.log(radixSort_String(arr));//["a", "ape", "apple", "banana", "he", "orange"]
+```
+
